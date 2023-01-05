@@ -14,3 +14,11 @@ app.use(stud.routes()).use(stud.allowedMethods());
 app.listen(3001, function() {
     console.log("Server Started At : http://localhost:30001/students");
 });
+
+const mongo = new koa();
+
+const mongostud = require('./mongorouter');
+
+mongo.use(cors());
+mongo.use(mongostud.routes()).use(mongostud.allowedMethods);
+mongo.listen(3002, () => console.log('http://localhost:3002/students'));

@@ -140,7 +140,7 @@ export default {
     async GetAllStudents(){
       this.students = await this.$axios.$get(url)
       .then((res) => {
-        console.log(res);
+        console.log(res); 
         this.tempStud = res;
         console.log(this.students);
       })
