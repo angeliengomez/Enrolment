@@ -36,9 +36,9 @@
                       </template>
                     </b-table>
                     <form @submit.prevent="addStudent">
-                      <input v-model="newStudentlname" placeholder="Lastname" style="margin-left: 20px; font-family: 'Space Mono';">
-                      <input v-model="newStudentfname" placeholder="Firstname" style="margin-left:5px; margin-right: 45px; margin-top: 20px; font-family: 'Space Mono';">
-                      <input v-model="newStudentcourse" placeholder="Course" style="margin-left: -40px; font-family: 'Space Mono';">
+                      <input v-model="student.LastName" placeholder="Lastname" style="margin-left: 20px; font-family: 'Space Mono';">
+                      <input v-model="student.FirstName" placeholder="Firstname" style="margin-left:5px; margin-right: 45px; margin-top: 20px; font-family: 'Space Mono';">
+                      <input v-model="student.Course" placeholder="Course" style="margin-left: -40px; font-family: 'Space Mono';">
 
                       <button
                         style="margin-left: 300px; margin-top: 20px; margin-bottom: 20px; font-family: 'Press Start 2P' ">ADD
@@ -84,34 +84,31 @@ section {
 </style>
 <script>
 let id = 0;
-const url = "http://localhost:3001/students";
+const url = "http://localhost:3002/students";
 export default {
   data() {
     return {
       newStudent: '',
       fields: ['id', 'LastName', 'FirstName', 'Course', 'buttons'],
       students: [],
-      newStudentlname: "",
-      newStudentfname: "",
-      newStudentcourse: "",
+      student: {id: 0, FirstName: "", LastName: "", Course: "", edit: false},
       tempStud: []
     }
   },
   methods: {
     
     async addStudent() {
-
-      await this.$axios.$post(url + '/create', {FirstName: this.newStudentlname, LastName: this.newStudentfname, Course: this.newStudentcourse})
-      .then((res)=>console.log(res))
-      .catch((err) => console.log(err));  
-      this.GetAllStudents();    
-      // this.students.push({ id: id++, LastName: this.newStudentlname, FirstName: this.newStudentfname, Course: this.newStudentcourse });
-      this.newStudentlname = "";
-      this.newStudentfname = "";
-      this.newStudentcourse = "";
+      console.log(this.student.id);
+      await this.$axios.$post(url + '/insert', this.student)
+        .then((res) => {
+          console.log(res);
+          this.student = {id: 0, FirstName: "", LastName: "", Course: "", edit: false};
+          this.GetAllData();
+        })
+        .catch((err) => console.log(err));
     },
-    async removeStudent(id) {
-      await this.$axios.$post(url + '/delete', {id:id})
+    async removeStudent(item) {
+      await this.$axios.$post(url + '/delete', {id:item.id})
       .then((res) => {
         console.log(res);
         this.GetAllStudents();
@@ -128,16 +125,20 @@ export default {
       }else
       {
           item.edit = !item.edit 
-          await this.$axios.$post(url + '/update', {id:item.id, LastName: item.LastName, FirstName:item.FirstName, Course: item.Course})
+          await this.$axios.$post(url + '/update', item)
           .then((res) => {
             console.log(res);
             this.GetAllStudents();
           })
           .catch((err) => console.log(err));
       }
-      
+    },
+    GetCurrentID(){
+      this.student.id = Math.max.apply(Math, this.students.map(function(o) { return o.id; })) + 1;
+      console.log(this.student.id);
     },
     async GetAllStudents(){
+      console.log("Get All Student");
       this.students = await this.$axios.$get(url)
       .then((res) => {
         console.log(res); 
@@ -146,6 +147,7 @@ export default {
       })
       .catch((err) => console.log(err));
       this.students = this.tempStud;
+      this.GetCurrentID();
     }
   },
   async mounted(){
