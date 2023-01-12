@@ -1,5 +1,5 @@
 <template>
-    <StudentList/>
+    <MongoTable/>
   </template>
   
   <script>
