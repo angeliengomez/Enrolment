@@ -8,15 +8,15 @@ const GetUsers = async () => {
 };
 
 //Insert new document
-const insertAccount = async(id, fn, ln, crs) => {
-    return await user.insertOne({id: parseInt(id), FirstName: fn, LastName: ln, Course: crs,  edit: false});
+const insertAccount = async(id, firstname, lastname) => {
+    return await user.insertOne({id: parseInt(id), firstname: firstname, lastname: lastname, edit: false});
 };
 
 //Update Document
-const updateAccount = async(id, fn, ln) =>{
+const updateAccount = async(id, firstname, lastname) =>{
     return await user.updateOne({id: parseInt(id)}, {$set:{
-        name: fn,
-        lastname: ln
+        firstname: firstname,
+        lastname: lastname
     }});
 };
 

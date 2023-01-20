@@ -19,8 +19,9 @@ app.listen(3001, function() {
 const mongo = new koa();
 
 mongo.use(bodyParser());
-const mongostud = require('./mongorouter');
-
 mongo.use(cors());
-mongo.use(mongostud.routes()).use(mongostud.allowedMethods);
-mongo.listen(3002, () => console.log('http://localhost:3002/students'));
+
+const mongorouter = require('./MongoRouter');
+mongo.use(mongorouter.routes()).use(mongorouter.allowedMethods);
+
+mongo.listen(3002, function(){console.log("http://localhost:3002/users")});
