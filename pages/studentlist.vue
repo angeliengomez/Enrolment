@@ -1,6 +1,6 @@
 <template>
-    <MongoTable/>
-  </template>
+      <MongoTable/>
+</template>
   
   <script>
   export default {

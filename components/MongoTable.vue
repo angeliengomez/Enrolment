@@ -8,12 +8,12 @@
           <span class="h1 fw-bold mb-0"
                       style="font-family: 'Press Start 2P'; color: black; font-size: 50px; margin-left: 300px; margin-top: 5px; align-items: center; margin-bottom: 100px;">Student
                       List</span>
-        <input type="text" id="form-name" v-model="item.firstname" placeholder="First Name" class="form-control" style="margin-top: 40px; margin-bottom: 40px;">
-        <input type="text" v-model="item.lastname" placeholder="Last Name" class="form-control" style="margin-top: 50px; margin-right: 50px; margin-bottom: 50px;">
-        <button @click="addItem" class="btn btn-dark"><i class="fas fa-plus" style=" align-items: center; font-family: 'Press Start 2P';  ">Add</i></button>
+        <input type="text" id="FirstName" v-model="item.firstname" placeholder="First Name" class="form-control" style="margin-top: 40px; margin-bottom: 40px;">
+        <input type="text" id="LastName" v-model="item.lastname" placeholder="Last Name" class="form-control" style="margin-top: 50px; margin-right: 50px; margin-bottom: 50px;">
+        <button @click="addItem" id="AddStudentBtn" class="btn btn-dark"><i class="fas fa-plus" style=" align-items: center; font-family: 'Press Start 2P';  ">Add</i></button>
           </div>
         <br><br>
-        <table class="table table-striped table-bordered table-sm">
+        <table id="StudTable" class="table table-striped table-bordered table-sm">
           <thead class="thead-light">
             <th>First Name</th>
             <th>Last Name</th>
@@ -22,11 +22,11 @@
           <tr v-for="item in items" :key="item.firstname">
             <td>
               <input v-if="item.edit" type="text" v-model="item.firstname">
-              <span v-else>{{item.firstname}} </span>
+              <span v-else>{{item.firstname}}</span>
             </td>
             <td>
               <input v-if="item.edit" type="text" v-model="item.lastname">
-              <span v-else>{{item.lastname}} </span>
+              <span v-else>{{item.lastname}}</span>
             </td>
             <td><button @click="ItemEdit(item)" class="btn btn-info"><i class="far fa-edit">edit</i></button>
               <button @click="removeItem(item)" class="btn btn-danger"><i class="far fa-trash-alt">delete</i></button></td>
