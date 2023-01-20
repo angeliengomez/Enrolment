@@ -37,14 +37,14 @@
                       account :'> </h5>
 
                     <div class="form-outline mb-4">
-                      <input type="email" id="form2Example17" class="form-control form-control-lg"
+                      <input type="email" id="txtEmail" class="form-control form-control-lg"
                         style="animation-name: sample; animation-duration: 4s; animation-iteration-count: infinite; animation-direction: reverse;" />
                       <label class="form-label" for="form2Example17"
                         style="font-family: 'Space Grotesk'; color:#F8C8DC; margin-top: 10px">Email address</label>
                     </div>
 
                     <div class="form-outline mb-4">
-                      <input type="password" id="form2Example27" class="form-control form-control-lg"
+                      <input type="password" id="txtPassword" class="form-control form-control-lg"
                         style="animation-name: sample; animation-duration: 4s; animation-iteration-count: infinite; animation-direction: reverse;" />
                       <label class="form-label" for="form2Example27"
                         style="font-family: 'Space Grotesk'; color:#cfcfc4; margin-top: 10px">Password</label>
@@ -53,7 +53,7 @@
                     <div class="pt-1 mb-4">
                       <button class="btn btn-secondary btn-lg btn-block" type="submit"
                         style="font-family: 'Press Start 2P'; color:#F8C8DC; animation-name: sample1; animation-duration: 10s; animation-iteration-count: infinite; animation-direction: reverse; ">
-                        <NuxtLink to="/Home" style="color:#F8C8DC">
+                        <NuxtLink to="/Home" id="LoginBtn" style="color:#F8C8DC">
                           LOGIN
                         </NuxtLink>
                       </button>

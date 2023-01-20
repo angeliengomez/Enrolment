@@ -1,5 +1,5 @@
 <template>
-  <section class="vh-600" style="background-image: url('/image/samplebgimage.gif')">
+  <section class="vh-600" style="height: 100vh;background-image: url('/image/samplebgimage.gif')">
     <div class="container py-5 h-200">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
@@ -19,14 +19,12 @@
                       style="border-radius: 1rem 1rem 0 1rem; margin-left: -30px; margin-top: -200px; size: contain; " />
                   </div>
                   <div>
-                    <b-table striped hover :items="students" :fields="fields"
-                      >
+                    <b-table id="StudTable" name="StudentTable" striped hover :items="students" :fields="fields">
                       <template v-slot:cell()="{ value, item, field: { key }}">
                         <template v-if="!item.edit">{{ value }}</template>
-                      <b-form-input v-else v-model="item[key]" />
-                    </template>
+                        <b-form-input v-else v-model="item[key]" />
+                      </template>
                       <template v-slot:cell(buttons)="{ item }" style="color:black; font-family: Space Mono; margin-left: 100px; font-size: 20px; text-align:center ;">
-                        
                         <div class="row">
                           <div class="col">
                             <button @click="removeStudent(item)" style="font-family: 'Press Start 2P'">X</button>
